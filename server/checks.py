@@ -112,7 +112,7 @@ PAGE TEXT (may be empty):
 Return JSON: {{"brand": str, "product": str (product line, e.g. 'Convertible Bassinet'), "model": str or null,
 "category": str (1-2 words, e.g. 'bassinet'), "cpsc_terms": [up to 3 short strings for searching a recall database by product name, most specific first]}}"""
     try:
-        d = llm.claude_json(prompt, 600)
+        d = llm.claude_json(prompt, 600, output_schema=llm.IDENTIFY_SCHEMA)
     except Exception:  # noqa: BLE001
         d = {}
     terms = [t.strip() for t in (d.get("cpsc_terms") or []) if isinstance(t, str) and t.strip()][:3]
@@ -203,7 +203,7 @@ Return JSON:
  "allegations": [{{"kind": "lawsuit"|"complaint"|"report", "text": str, "source": int}}],
  "safety_note": str (3-4 plain sentences addressed to the creator),
  "what_to_do": [str] (2-4 short actions)}}"""
-    data = llm.claude_json(prompt, 2000)
+    data = llm.claude_json(prompt, 2000, output_schema=llm.CHECK_SCHEMA)
     actions, allegations = validate(data, pool)
     verdict = compute_verdict(actions, allegations, official_down)
 

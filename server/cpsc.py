@@ -1,10 +1,4 @@
-"""CPSC recall database lookups (public API, no key).
-
-GET https://www.saferproducts.gov/RestWebServices/Recall?format=json&ProductName=...
-Field names follow the CPSC Recalls Retrieval Web Services guide but are UNVERIFIED (host blocked in the build
-sandbox), so parsing is defensive and any failure becomes a visible gap. Verify first (M0):
-  curl "https://www.saferproducts.gov/RestWebServices/Recall?format=json&ProductName=bassinet" | head -c 2000
-"""
+"""CPSC recall database lookups through the public SaferProducts web service."""
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, timedelta
 
@@ -13,6 +7,7 @@ import requests
 from . import config
 
 CPSC_URL = "https://www.saferproducts.gov/RestWebServices/Recall"
+USER_AGENT = "RecallWatch/1.0"
 
 
 def _names(items, key="Name"):
@@ -43,7 +38,12 @@ def normalize(r: dict) -> dict:
 
 
 def _get(params):
-    resp = requests.get(CPSC_URL, params={**params, "format": "json"}, timeout=config.T_CPSC)
+    resp = requests.get(
+        CPSC_URL,
+        params={**params, "format": "json"},
+        headers={"Accept": "application/json", "User-Agent": USER_AGENT},
+        timeout=config.T_CPSC,
+    )
     resp.raise_for_status()
     data = resp.json()
     return data if isinstance(data, list) else []

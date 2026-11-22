@@ -9,24 +9,27 @@ Full spec: `recall-watch-prd.md` (kept in the Creator Hackathon project).
 
 ## Run it (Replit or local)
 
-1. Add secrets `YDC_API_KEY` and `ANTHROPIC_API_KEY` (Replit: Secrets tab). Without both keys the app runs in **demo mode**
-   with a visible banner.
+1. For local use, copy `.env.example` to `.env` and set `YDC_API_KEY` and `ANTHROPIC_API_KEY`; the app loads `.env` on
+   startup. On Replit, add them in the Secrets tab. Without both keys the app runs in **demo mode** with a visible banner.
 2. `bash start.sh` (installs and builds the frontend if `web/dist` is missing). Open the preview.
    Local dev: `pip install -r requirements.txt`, `cd web && npm install && npm run dev` (proxies `/api` to port 8000), and in
    another terminal `gunicorn -k gthread --threads 16 -b 127.0.0.1:8000 server.app:app`.
+   To override automatic demo mode, set `DEMO_MODE=off` before starting; live product search still requires a valid
+   `YDC_API_KEY`.
 
-## Do this first: M0 smoke test (nothing here has been called live yet)
+## M0 smoke test
 
-The build sandbox could not reach You.com or saferproducts.gov, so the integrations were written from You.com's published
-OpenAPI specs and the CPSC web-services guide and tested only against fakes. Run:
+Run this before using live checks:
 
 ```
 python -m server.cli smoke
 ```
 
 It makes one real call each to CPSC, You.com Search, Extract, Research and Claude and prints OK or FAIL per step.
-**Unverified assumption to check first:** the CPSC JSON field names in `server/cpsc.py` (`RecallNumber`, `RecallDate`, `Title`,
-`URL`, `Products[Name,Model]`, `Hazards`, `Remedies`...). If the CPSC call fails or returns different keys, fix `normalize()`.
+The SaferProducts recall endpoint is public and does not require an API key. The CPSC client sends an explicit User-Agent
+because the service may reject Python requests' default User-Agent.
+For live product search, use a valid `YDC_API_KEY` and leave `DEMO_MODE` unset or set it to `off`; `DEMO_MODE=on` returns
+fixture or placeholder results instead.
 Every failure degrades to a visible gap or an `unverified` verdict, never to a false "no issues found".
 
 ## Record real demo data (after smoke passes)

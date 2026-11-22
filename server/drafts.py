@@ -25,7 +25,7 @@ Write the creator's follow-up for their followers. Calm, accountable, warm, firs
 Use ONLY facts above. If the match is only "possible" or the issue is allegations, do NOT say the product was recalled: say safety concerns were raised and point followers to the official source.
 Include: stop-use / check-the-recall-page guidance only as supported by the sources, the remedy only if listed, that the affiliate link is being removed, and the official URL.
 Return JSON: {{"post_caption": str (under 150 words), "story_script": [3 short lines], "comment_reply": str (under 40 words)}}"""
-    d = llm.claude_json(prompt, 1200)
+    d = llm.claude_json(prompt, 1200, output_schema=llm.FOLLOW_UP_SCHEMA)
     return {"post_caption": d.get("post_caption", ""), "story_script": [str(x) for x in (d.get("story_script") or [])][:4],
             "comment_reply": d.get("comment_reply", "")}
 
@@ -39,7 +39,7 @@ Gaps: {check['gaps']}
 
 Write a short, honest post draft. Include a one-line safety mention (what was checked: CPSC recalls and warnings; "not a guarantee of safety"), and a clear disclosure line for affiliate or sponsored content (e.g. "Affiliate link: I may earn a commission"). No medical claims. Do not invent product features, prices or statistics: use placeholders like [what you liked] where details are missing.
 Return JSON: {{"caption": str (under 150 words), "story_script": [3 short lines]}}"""
-    d = llm.claude_json(prompt, 1200)
+    d = llm.claude_json(prompt, 1200, output_schema=llm.REVIEW_POST_SCHEMA)
     return {"caption": d.get("caption", ""), "story_script": [str(x) for x in (d.get("story_script") or [])][:4]}
 
 
@@ -50,5 +50,5 @@ Creator profile: {json.dumps(profile)}
 Rules: address "the partnerships team" generally; NO invented names or email addresses; do not invent brand facts, campaigns, prices or statistics (use placeholders like [specific detail about the brand] if needed); under 170 words; clear ask; sign off with the handle or "[Your name]".
 {'You may add one sentence saying you checked CPSC recalls and warnings before pitching.' if ok else 'Do NOT mention any safety check.'}
 Return JSON: {{"subject": str, "body": str}}"""
-    d = llm.claude_json(prompt, 1000)
+    d = llm.claude_json(prompt, 1000, output_schema=llm.SPONSOR_PITCH_SCHEMA)
     return {"subject": d.get("subject", ""), "body": d.get("body", ""), "partnership_page_url": None}

@@ -1,4 +1,5 @@
 import json
+from types import SimpleNamespace
 
 import pytest
 
@@ -49,7 +50,7 @@ def fake_world(monkeypatch, *, cpsc_ok=True, gov_ok=True, model=None):
             return [{"url": "https://cpsc.gov/r1", "title": "CPSC recall r1", "description": "d", "snippets": ["s"]}]
         return [{"url": "https://news.example/a", "title": "News A", "snippets": ["s"]}]
 
-    def f_claude(prompt, max_tokens=1800):
+    def f_claude(prompt, max_tokens=1800, **kwargs):
         if "cpsc_terms" in prompt:
             return {"brand": "AirClub", "product": "Convertible Bassinet", "model": "QX-831", "category": "bassinet", "cpsc_terms": ["bassinet"]}
         return model or {"headline": "h", "official_actions": [], "allegations": [], "safety_note": "n", "what_to_do": ["a"]}
@@ -321,6 +322,23 @@ def test_demo_flow_end_to_end(client):
     assert client.post("/api/demo/reset").status_code == 200 and client.get("/api/items").json == []
 
 
+def test_product_search_uses_live_provider_when_demo_is_off(client, monkeypatch):
+    monkeypatch.setattr(config, "demo_active", lambda: False)
+    calls = []
+
+    def fake_search(query, **kwargs):
+        calls.append(query)
+        return [{"url": "https://target.com/cradlewise", "title": "Cradlewise Smart Crib | Target"}]
+
+    monkeypatch.setattr(youcom, "search", fake_search)
+    response = client.post("/api/products/search", json={"q": "cradlewise"})
+
+    assert response.status_code == 200
+    assert response.json["mode"] == "live"
+    assert response.json["results"][0]["name"] == "Cradlewise Smart Crib"
+    assert calls == ["cradlewise baby product"]
+
+
 def test_demo_mode_toggle(client):
     assert client.post("/api/demo/mode", json={"on": "maybe"}).status_code == 400
     assert client.post("/api/demo/mode", json={"on": False}).json["mode"] == "live"
@@ -354,8 +372,52 @@ def test_cpsc_normalize_is_defensive():
     assert cpsc.normalize({})["title"] is None
 
 
+def test_cpsc_request_sets_client_headers(monkeypatch):
+    seen = {}
+
+    class Response:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return []
+
+    def fake_get(url, **kwargs):
+        seen["url"] = url
+        seen.update(kwargs)
+        return Response()
+
+    monkeypatch.setattr(cpsc.requests, "get", fake_get)
+    assert cpsc._get({"ProductName": "bassinet"}) == []
+    assert seen["headers"] == {"Accept": "application/json", "User-Agent": cpsc.USER_AGENT}
+    assert seen["params"] == {"ProductName": "bassinet", "format": "json"}
+
+
 def test_parse_json_tolerant():
     assert llm.parse_json('```json\n{"a": 1}\n```') == {"a": 1}
     assert llm.parse_json('Sure! {"a": 2} hope that helps') == {"a": 2}
     with pytest.raises(ValueError):
         llm.parse_json("no json here")
+
+
+def test_claude_json_uses_schema_constrained_output(monkeypatch):
+    calls = []
+
+    def create(**kwargs):
+        calls.append(kwargs)
+        return SimpleNamespace(stop_reason="end_turn", content=[SimpleNamespace(type="text", text='{"ok":true}')])
+
+    client = SimpleNamespace(messages=SimpleNamespace(create=create))
+    monkeypatch.setattr(llm, "_client", client)
+
+    assert llm.claude_json("Return ok.", 50, output_schema=llm.SMOKE_SCHEMA) == {"ok": True}
+    assert calls[0]["output_config"]["format"] == {"type": "json_schema", "schema": llm.SMOKE_SCHEMA}
+
+
+def test_claude_json_reports_token_limit(monkeypatch):
+    client = SimpleNamespace(messages=SimpleNamespace(create=lambda **kwargs: SimpleNamespace(
+        stop_reason="max_tokens", content=[])))
+    monkeypatch.setattr(llm, "_client", client)
+
+    with pytest.raises(ValueError, match="response limit"):
+        llm.claude_json("Return ok.", 50, output_schema=llm.SMOKE_SCHEMA)

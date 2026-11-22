@@ -38,7 +38,7 @@ def smoke():
     step("You.com Search", lambda: f"{len(youcom.search('AirClub bassinet recall', 3, None, ['cpsc.gov']))} results")
     step("You.com Extract", lambda: f"{len(youcom.extract('https://www.cpsc.gov/Recalls'))} chars")
     step("You.com Research (lite)", lambda: f"{len(youcom.research('Was the AirClub convertible bassinet recalled?')[0])} chars")
-    step("Claude JSON", lambda: llm.claude_json('Return {"ok": true}', 50))
+    step("Claude JSON", lambda: llm.claude_json('Return {"ok": true}', 50, output_schema=llm.SMOKE_SCHEMA))
     print("ALL OK" if ok else "SOME CHECKS FAILED: fix before the demo")
     return 0 if ok else 1
 

@@ -1,8 +1,12 @@
 """Environment, constants and demo-mode switch."""
 import os
 
+from dotenv import load_dotenv
+
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(BASE)
+load_dotenv(os.path.join(ROOT, ".env"), override=False)
+
 DATA_DIR = os.getenv("DATA_DIR", os.path.join(ROOT, "data"))
 DB_PATH = os.path.join(DATA_DIR, "recallwatch.db")
 FIXTURES = os.path.join(BASE, "fixtures")
