@@ -1,0 +1,11 @@
+modules = ["python-3.12", "nodejs-20"]
+run = "bash start.sh"
+
+[deployment]
+run = ["bash", "start.sh"]
+build = ["sh", "-c", "pip install -r requirements.txt && cd web && npm install && npm run build"]
+deploymentTarget = "autoscale"
+
+[[ports]]
+localPort = 8000
+externalPort = 80
