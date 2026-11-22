@@ -1,0 +1,35 @@
+{
+  "_note": "Hand-assembled demo search results (two real CPSC recalls found during research). Replace with `python -m server.cli record search bassinet` on a networked machine.",
+  "results": [
+    {
+      "id": "demo-airclub",
+      "name": "AirClub Convertible Bassinet",
+      "brand": "AirClub",
+      "retailer": "Amazon",
+      "price_text": "$110 to $130",
+      "url": null,
+      "image_url": null,
+      "pre_flag": {
+        "recall_number": null,
+        "date": "2026-03-26",
+        "title": "AirClub Convertible Bassinets Recalled Due to Risk of Serious Injury or Death from Fall Hazard",
+        "url": "https://cpsc.gov/Recalls/2026/AirClub-Convertible-Bassinets-Recalled-Due-to-Risk-of-Serious-Injury-or-Death-from-Fall-Hazard-Violates-Mandatory-Standard-for-Bedside-Sleepers"
+      }
+    },
+    {
+      "id": "demo-papablic",
+      "name": "Papablic Bedside Sleeper with Play Yard Extension",
+      "brand": "Papablic",
+      "retailer": null,
+      "price_text": null,
+      "url": null,
+      "image_url": null,
+      "pre_flag": {
+        "recall_number": null,
+        "date": "2026-10-15",
+        "title": "Papablic of USA Recalls Convertible Bedside Sleepers",
+        "url": "https://www.cpsc.gov/recalls/2027/papablic-of-usa-recalls-convertible-bedside-sleepers-due-to-risk-of-serious-injury-or-death-from-entrapment-suffocation-and-fall-hazards-violate-mandatory-standard-for-play-yards"
+      }
+    }
+  ]
+}

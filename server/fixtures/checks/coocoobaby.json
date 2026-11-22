@@ -1,0 +1,45 @@
+{
+  "_recorded": false,
+  "_provenance": "Hand-assembled from the public CPSC recall and warning pages found during research. Not a live run.",
+  "_match": ["coocoobaby"],
+  "_ident": {"brand": "CooCooBaby", "product": "Baby Lounger", "model": null},
+  "result": {
+    "verdict": "do_not_recommend",
+    "headline": "CPSC recalled CooCooBaby baby loungers, then warned the firm hasn't provided the agreed remedy.",
+    "safety_note": "CPSC announced a recall of CooCooBaby baby loungers on June 18, 2026 (recall 26-569, about 2,355 units) for suffocation and fall hazards that violate the mandatory standard for infant sleep products. CPSC later issued a warning saying the firm has been uncooperative and has not provided the agreed refund, and urged consumers to dispose of the product. The loungers were sold on CooCooBabyOfficial.com and Amazon from December 2024 through March 2026.",
+    "what_to_do": [
+      "Don't post an affiliate link for this product.",
+      "If you've already linked it, add a correction and remove the link.",
+      "Tell followers that CPSC says the refund hasn't been provided, and point them to the official notices."
+    ],
+    "official_actions": [
+      {
+        "type": "recall",
+        "title": "CooCooBaby Baby Loungers Recalled Due to Risk of Serious Injury or Death from Suffocation and Fall Hazards",
+        "date": "2026-06-18",
+        "hazard": "Suffocation and fall hazards (violates the mandatory standard for infant sleep products)",
+        "remedy": "Refund",
+        "match": "confirmed",
+        "url": "https://www.cpsc.gov/Recalls/2026/CooCooBaby-Baby-Loungers-Recalled-Due-to-Risk-of-Serious-Injury-or-Death-from-Suffocation-and-Fall-Hazards-Violates-Mandatory-Standard-for-Infant-Sleep-Products",
+        "source_title": "CPSC recall: CooCooBaby Baby Loungers"
+      },
+      {
+        "type": "warning",
+        "title": "CPSC Warns Consumers to Stop Using CooCooBaby Baby Loungers Immediately",
+        "date": null,
+        "hazard": "Suffocation and fall hazards; firm uncooperative with the recall remedy",
+        "remedy": null,
+        "match": "confirmed",
+        "url": "https://www.cpsc.gov/Warnings/2026/CPSC-Warns-Consumers-to-Stop-Using-CooCooBaby-Baby-Loungers-Immediately-Due-to-Risk-of-Serious-Injury-or-Death-from-Suffocation-and-Fall-Hazards-Violate-Mandatory-Standard-for-Infant-Sleep-Products",
+        "source_title": "CPSC warning: CooCooBaby Baby Loungers"
+      }
+    ],
+    "allegations": [],
+    "sources": [
+      {"url": "https://www.cpsc.gov/Recalls/2026/CooCooBaby-Baby-Loungers-Recalled-Due-to-Risk-of-Serious-Injury-or-Death-from-Suffocation-and-Fall-Hazards-Violates-Mandatory-Standard-for-Infant-Sleep-Products", "title": "CPSC recall: CooCooBaby Baby Loungers"},
+      {"url": "https://www.cpsc.gov/Warnings/2026/CPSC-Warns-Consumers-to-Stop-Using-CooCooBaby-Baby-Loungers-Immediately-Due-to-Risk-of-Serious-Injury-or-Death-from-Suffocation-and-Fall-Hazards-Violate-Mandatory-Standard-for-Infant-Sleep-Products", "title": "CPSC warning: CooCooBaby Baby Loungers"}
+    ],
+    "gaps": ["Demo data: not a live check"],
+    "checked_on": "2026-11-22"
+  }
+}

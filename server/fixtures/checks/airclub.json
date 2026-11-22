@@ -1,0 +1,35 @@
+{
+  "_recorded": false,
+  "_provenance": "Hand-assembled from the public CPSC recall page and news coverage found during research. Not a live run. Replace with `python -m server.cli record check \"AirClub Convertible Bassinet\"`.",
+  "_match": ["airclub"],
+  "_ident": {"brand": "AirClub", "product": "Convertible Bassinet", "model": "QX-831"},
+  "result": {
+    "verdict": "do_not_recommend",
+    "headline": "CPSC recall: AirClub convertible bassinets can leave a gap that poses a fall hazard to infants.",
+    "safety_note": "CPSC announced a recall of AirClub convertible bassinets on March 26, 2026, covering about 110,400 units. The mechanism that attaches the bassinet to an adult bed can create an opening between the sleeper and the mattress, which CPSC says poses a deadly fall hazard to infants and violates the mandatory standard for bedside sleepers. The remedy is a repair, with AirClub providing a replacement attachment. News coverage lists model QX-831 on the label under the mattress pad, so check your model.",
+    "what_to_do": [
+      "Don't post an affiliate link for this product.",
+      "If you've already linked it, add a correction and remove the link.",
+      "Point followers to the official CPSC recall notice."
+    ],
+    "official_actions": [
+      {
+        "type": "recall",
+        "title": "AirClub Convertible Bassinets Recalled Due to Risk of Serious Injury or Death from Fall Hazard",
+        "date": "2026-03-26",
+        "hazard": "Fall hazard from the bed-attachment mechanism (violates the mandatory standard for bedside sleepers)",
+        "remedy": "Repair (replacement attachment)",
+        "match": "confirmed",
+        "url": "https://cpsc.gov/Recalls/2026/AirClub-Convertible-Bassinets-Recalled-Due-to-Risk-of-Serious-Injury-or-Death-from-Fall-Hazard-Violates-Mandatory-Standard-for-Bedside-Sleepers",
+        "source_title": "CPSC recall: AirClub Convertible Bassinets"
+      }
+    ],
+    "allegations": [],
+    "sources": [
+      {"url": "https://cpsc.gov/Recalls/2026/AirClub-Convertible-Bassinets-Recalled-Due-to-Risk-of-Serious-Injury-or-Death-from-Fall-Hazard-Violates-Mandatory-Standard-for-Bedside-Sleepers", "title": "CPSC recall: AirClub Convertible Bassinets"},
+      {"url": "https://www.boston25news.com/news/trending/recall-alert-110k-airclub-bassinets-recalled-due-fall-hazard/6PTUCPQUQ5H6BLMIAHTLPCY3CQ/", "title": "Boston 25 News: Recall alert, 110K AirClub bassinets recalled due to fall hazard"}
+    ],
+    "gaps": ["Demo data: not a live check"],
+    "checked_on": "2026-11-22"
+  }
+}

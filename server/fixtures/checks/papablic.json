@@ -1,0 +1,34 @@
+{
+  "_recorded": false,
+  "_provenance": "Hand-assembled from the public CPSC recall page found during research. Not a live run.",
+  "_match": ["papablic"],
+  "_ident": {"brand": "Papablic", "product": "Bedside Sleeper with Play Yard Extension", "model": "PAPA03001AI"},
+  "result": {
+    "verdict": "do_not_recommend",
+    "headline": "CPSC recall: Papablic convertible bedside sleepers pose entrapment, suffocation and fall hazards.",
+    "safety_note": "CPSC announced a recall of Papablic convertible bedside sleepers with play yard extensions, model PAPA03001AI, on October 15, 2026 (about 248 units). CPSC says the products violate the mandatory standard for play yards and that the latching and locking mechanism can fail, causing the product to collapse. The remedy is a refund.",
+    "what_to_do": [
+      "Don't post an affiliate link for this product.",
+      "If you've already linked it, add a correction and remove the link.",
+      "Point followers to the official CPSC recall notice."
+    ],
+    "official_actions": [
+      {
+        "type": "recall",
+        "title": "Papablic of USA Recalls Convertible Bedside Sleepers Due to Risk of Serious Injury or Death from Entrapment, Suffocation and Fall Hazards",
+        "date": "2026-10-15",
+        "hazard": "Entrapment, suffocation and fall hazards; latch can fail and cause collapse",
+        "remedy": "Refund",
+        "match": "confirmed",
+        "url": "https://www.cpsc.gov/recalls/2027/papablic-of-usa-recalls-convertible-bedside-sleepers-due-to-risk-of-serious-injury-or-death-from-entrapment-suffocation-and-fall-hazards-violate-mandatory-standard-for-play-yards",
+        "source_title": "CPSC recall: Papablic Bedside Sleepers"
+      }
+    ],
+    "allegations": [],
+    "sources": [
+      {"url": "https://www.cpsc.gov/recalls/2027/papablic-of-usa-recalls-convertible-bedside-sleepers-due-to-risk-of-serious-injury-or-death-from-entrapment-suffocation-and-fall-hazards-violate-mandatory-standard-for-play-yards", "title": "CPSC recall: Papablic Bedside Sleepers"}
+    ],
+    "gaps": ["Demo data: not a live check"],
+    "checked_on": "2026-11-22"
+  }
+}
